@@ -1,8 +1,6 @@
 import 'Story.dart';
 
 class StoryBrain {
-  int _storyNumber = 0;
-
   List<Story> _storyData = [
    Story(
        storyTitle: 'Your car has blown a tire on a winding road in the middle of nowhere with no cell phone reception. You decide to hitchhike. A rusty pickup truck rumbles to a stop next to you. A man with a wide brimmed hat with soulless eyes opens the passenger door for you and asks: "Need a ride, boy?".',
@@ -29,7 +27,7 @@ class StoryBrain {
        choiceOne: 'Restart',
        choiceTwo: '')
   ];
-
+  int _storyNumber = 0;
   String getStory() {
     return _storyData[_storyNumber].storyTitle;
   }
@@ -47,31 +45,18 @@ class StoryBrain {
 
   void nextStory(int choiceNumber) {
     // Try to refoctor into strategy design pattern
-    if (_storyNumber == 0) {
-      if (choiceNumber == 1) {
-        _storyNumber = 2;
-      } else {
-        _storyNumber = 1;
-      }
-    }
-
-    if (_storyNumber == 2) {
-      if (choiceNumber == 1) {
-        _storyNumber = 5;
-        restart();
-      } else {
-        _storyNumber = 4;
-        restart();
-      }
-    }
-
-    if (_storyNumber == 1) {
-      if (choiceNumber == 1) {
-        _storyNumber = 2;
-      } else {
-        _storyNumber = 3;
-        restart();
-      }
+    if (choiceNumber == 1 && _storyNumber == 0) {
+      _storyNumber = 2;
+    } else if (choiceNumber == 2 && _storyNumber == 0) {
+      _storyNumber = 1;
+    } else if (choiceNumber == 1 && _storyNumber == 2) {
+      _storyNumber = 5;
+    } else if (choiceNumber == 2 && _storyNumber == 2) {
+      _storyNumber = 4;
+    } else if (choiceNumber == 1 && _storyNumber == 1) {
+      _storyNumber = 2;
+    } else if (choiceNumber == 2 && _storyNumber == 1) {
+      _storyNumber = 3;
     }
   }
 
