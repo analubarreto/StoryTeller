@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import './StoryBrain.dart';
 
-StoryBrain storyBrain = StoryBrain();
 void main() {
   runApp(Destini());
 }
@@ -12,8 +11,9 @@ class Destini extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      theme: ThemeData(fontFamily: 'Fira Sans'),
       home: Scaffold(
-        backgroundColor: Colors.grey.shade100,
+        backgroundColor: Colors.blueGrey.shade800,
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
@@ -24,7 +24,7 @@ class Destini extends StatelessWidget {
     );
   }
 }
-
+StoryBrain storyBrain = StoryBrain();
 class StoryPage extends StatefulWidget {
   @override
   _StoryPageState createState() => _StoryPageState();
@@ -35,6 +35,7 @@ class _StoryPageState extends State<StoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.blueGrey.shade800,
       body: Container (
         padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 15.0),
         constraints: BoxConstraints.expand(),
@@ -49,6 +50,8 @@ class _StoryPageState extends State<StoryPage> {
                     storyBrain.getStory(),
                     style: TextStyle(
                       fontSize: 25.0,
+                      color: Colors.grey.shade100,
+                      fontFamily: 'FiraSans'
                     ),
                   ),
                 ),
@@ -57,15 +60,16 @@ class _StoryPageState extends State<StoryPage> {
                 flex: 2,
                 child: FlatButton(
                   onPressed: () {
-                    // Choice 1 made by user
-                    //TODO: Step 18 - Call the nextStory() method from storyBrain and pass the number 1 as the choice made by the user.
+                    setState(() {
+                      storyBrain.nextStory(1);
+                    });
                   },
-                  color: Colors.red,
+                  color: Colors.lightBlue,
                   child: Text (
-                  //TODO: Step 13 - Use the storyBrain to get the text for choice 1.
                   storyBrain.getChoiceOne(),
                   style: TextStyle(
                     fontSize: 20.0,
+                    color: Colors.grey.shade100
                   )
                   )
                 )
@@ -79,15 +83,16 @@ class _StoryPageState extends State<StoryPage> {
                 //TODO: Step 28 - Set the "visible" property of the Visibility Widget to equal the output from the buttonShouldBeVisible() method in the storyBrain.
                 child: FlatButton(
                   onPressed: () {
-                    // Choice 2 made by user.
-                    //TODO: Step 19 - Call the nextStory() method from storyBrain and pass the number 2 as the choice made by the user.
+                    setState(() {
+                      storyBrain.nextStory(2);
+                    });
                   },
-                  color: Colors.blue,
+                  color: Colors.indigo.shade400,
                   child: Text(
-                    //TODO: Step 14 - Use the storyBrain to get the text for choice 2.
-                    'Choice 2',
+                    storyBrain.getChoiceTwo(),
                     style: TextStyle(
                       fontSize: 20.0,
+                      color: Colors.grey.shade100,
                     )
                   )
                 )

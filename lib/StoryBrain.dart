@@ -13,7 +13,6 @@ class StoryBrain {
        'At least he\'s honest. I\'ll climb in.',
        'Wait, I know how to change a tire.'),
    Story(
-       
        'As you begin to drive, the stranger starts talking about his relationship with his mother. He gets angrier and angrier by the minute. He asks you to open the glovebox. Inside you find a bloody knife, two severed fingers, and a cassette tape of Elton John. He reaches for the glove box.',
        'I love Elton John! Hand him the cassette tape.',
        'It\'s him or me! You take the knife and stab him.'),
@@ -38,25 +37,46 @@ String getStory() {
 }
 
 String getChoiceOne() {
-  print(_storyData[_storyNumber].choiceOne);
   return _storyData[_storyNumber].choiceOne;
 }
 
 String getChoiceTwo() {
-  print(_storyData[_storyNumber].choiceTwo);
   return _storyData[_storyNumber].choiceTwo;
 }
 //TODO: Step 25 - Change the storyNumber property into a private property so that only story_brain.dart has access to it. You can do this by right clicking on the name (storyNumber) and selecting Refactor -> Rename to make the change across all the places where it's used.
+void nextStory(int choiceNumber) {
+  // Try to refoctor into strategy design pattern
+  if (_storyNumber == 0) {
+    if (choiceNumber == 1) {
+      _storyNumber = 2;
+    } else {
+      _storyNumber = 1;
+    }
+  }
 
-//TODO: Step 16 - Create a property called storyNumber which starts with a value of 0. This will be used to track which story the user is currently viewing.
+  if (_storyNumber == 2) {
+    if (choiceNumber == 1) {
+      _storyNumber = 5;
+      restart();
+    } else {
+      _storyNumber = 4;
+      restart();
+    }
+  }
 
-//TODO: Step 17 - Create a method called nextStory(), it should not have any outputs but it should have 1 input called choiceNumber which will be the choice number (int) made by the user.
+  if (_storyNumber == 1) {
+    if (choiceNumber == 1) {
+      _storyNumber = 2;
+    } else {
+      _storyNumber = 3;
+      restart();
+    }
+  }
+}
 
-//TODO: Step 20 - Download the story plan here: https://drive.google.com/uc?export=download&id=1KU6EghkO9Hf2hRM0756xFHgNaZyGCou3
-
-//TODO: Step 21 - Using the story plan, update nextStory() to change the storyNumber depending on the choice made by the user. e.g. if choiceNumber was equal to 1 and the storyNumber is 0, the storyNumber should become 2.
-
-//TODO: Step 22 - In nextStory() if the storyNumber is equal to 3 or 4 or 5, that means it's the end of the game and it should call a method called restart() that resets the storyNumber to 0.
+void restart() {
+  _storyNumber = 0;
+}
 
 //TODO: Step 27 - Create a method called buttonShouldBeVisible() which checks to see if storyNumber is 0 or 1 or 2 (when both buttons should show choices) and return true if that is the case, else it should return false.
 }
